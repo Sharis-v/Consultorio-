@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <a class="btn btn-primary mb-3" href="{{ url_for('new_patient') }}">Nuevo paciente</a>
+  <a class="btn btn-secondary mb-3" href="{{ url_for('new_doctor') }}">Nuevo doctor</a>
+  <a class="btn btn-success mb-3" href="{{ url_for('new_appointment') }}">Nueva cita</a>
+
+  <h3>Pacientes</h3>
+  <ul class="list-group mb-3">
+    {% for p in patients %}
+      <li class="list-group-item">{{ p.name }} - {{ p.phone or '-' }}</li>
+    {% else %}
+      <li class="list-group-item">No hay pacientes</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Próximas citas</h3>
+  <ul class="list-group">
+    {% for a in appointments %}
+      <li class="list-group-item">{{ a.date }} — {{ a.patient.name }} con {{ a.doctor.name }}</li>
+    {% else %}
+      <li class="list-group-item">Sin citas</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
